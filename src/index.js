@@ -1,16 +1,14 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowerRouter as Router } from "react-router-dom";
-
+import React from "react";
+import { createRoot } from "react-dom";
 import App from "./App";
+import "./global-styles.css"
+import { AppProvider } from "./AppContext";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
-  <StrictMode>
-    <Router>
-      <App />
-    </Router>
-  </StrictMode>
+      <AppProvider>
+            <App />
+      </AppProvider>
 );

@@ -1,13 +1,16 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
-import Tada from "./Tada";
-import { Routes, Route } from "react-router-dom";
-
+import { useContext } from "react";
+import { AppContext } from "./AppContext";
 const App = () => {
+
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/tada" element={<Tada />} />
-    </Routes>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 };
 
