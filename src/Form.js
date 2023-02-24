@@ -1,22 +1,47 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components"
 
 const Form = () => {
+    const [formData, setFormData] = useState({})
 
+    useEffect(()=> {
+        fetch('/orders')
+        .then(res=>res.json())
+        .then(data=>console.log(data))
+        .catch(e => console.log(e))
+    }, [])
+
+    const handleChange = (e) => {
+        e.preventDefault()
+        const {id, value} = e.target;
+        setFormData({
+            ...formData,
+            [id]: value
+        })
+
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
-        sessionStorage.clear()
-        sessionStorage.setItem("name", /*person's name here */)
+        fetch('/api/form', {
+         method: "POST",
+         headers: {
+            "Content-type": "application/json",
+            "Accept": "application/json"
+         },
+         body: JSON.stringify(formData)
+        })
+        .then(r=>r.json())
+        .then(d=>console.log(d))
+        .catch(e=>console.log(e))
       }
     
 
     return (
         <Wrapper>
-            <h1>About me!</h1>
+            <h1>Order some Ice cream!</h1>
             <StyledForm onSubmit={handleSubmit}>
-
-                <Label>Name: <input type="text" /></Label>
-                <Label>Favorite color: <input type="text" /></Label>
-                <Label>Favorite number: <input type="number" /></Label>
+                <Label>Ice Cream: <input type="text" id="iceCream" onChange={e=>{handleChange(e)}} /></Label>
+                <Label>Num of scoops: <input type="number" id="numOfScoops" onChange={e=>{handleChange(e)}} /></Label>
                 <B>Submit</B>
 
             </StyledForm>

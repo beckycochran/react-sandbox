@@ -6,11 +6,6 @@ import { AppContext } from "./AppContext";
 const Home = () => {
   const { appState, setAppState } = useContext(AppContext)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-  }
-
   return (
     <Wrapper>
       <h1>Here's a homepage!</h1>
